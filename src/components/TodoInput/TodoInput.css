@@ -1,0 +1,17 @@
+.inputContainer{
+    /* border: 2px solid green; */
+    height: 200px;
+    /* margin */
+}
+.input1{
+    border-color:rgb(44, 208, 74) !important;
+    height: 38px;
+    width: 300px;
+    border-radius: 5px;
+}
+.input2{
+    border-color:rgb(44, 208, 74)!important ;
+    height: 38px;
+    width: 300px;
+    border-radius: 5px;
+}

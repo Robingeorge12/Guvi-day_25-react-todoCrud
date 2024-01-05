@@ -1,0 +1,33 @@
+.Todocontainer {
+  /* border: 1px solid red; */
+  /* height:; */
+}
+.TodoSubDiv {
+  /* border: 2px solid blue; */
+  /* height: 300px; */
+
+}
+
+.fil{
+  /* border: 2px solid brown; */
+}
+.cardDiv{
+  padding: 10px 15px !important;
+}
+.sel{
+  /* border: 1px solid red; */
+}
+.but{
+  /* border: 1px solid red; */
+  width: 90%;
+}
+.edit{
+  width: 71px;
+}
+.filterDiv{
+  /* width: 30%; */
+  /* border: 1px solid red; */
+}
+.filterSel{
+
+}
