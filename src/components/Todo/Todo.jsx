@@ -3,116 +3,86 @@ import "./Todo.css";
 import TodoInput from "../TodoInput/TodoInput";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import EditModal from "../EditModal/EditModal";
-
-// const data = [
-//   {
-//     id: 1,
-//     taskName: "task1",
-//     desc: "desc1",
-//     status: "Not Completed",
-//   },
-//   {
-//     id: 2,
-//     taskName: "task2",
-//     desc: "desc1",
-//     status: "Completed",
-//   },
-//   {
-//     id: 3,
-//     taskName: "task3",
-//     desc: "desc1",
-//     status: "Not Completed",
-//   },
-//   {
-//     id: 4,
-//     taskName: "task4",
-//     desc: "desc1",
-//     status: "Not Completed",
-//   },
-// ];
-function Todo({data,setTodo,todo,edit, setEdit,handleEdit,handleDelete,handleUpdate,handleStatusUpdate,handleFilter}) {
-  // const [todo, setTodo] = useState(data);
-  // const [state, setState] = useState(data);
-  // const [edit, setEdit] = useState(null);
+// data,setTodo,todo,edit, setEdit,handleEdit,handleDelete,handleUpdate,handleStatusUpdate,handleFilter
+const data = [
+  {
+    id: 1,
+    taskName: "task1",
+    desc: "desc1",
+    status: "Not Completed",
+  },
+  {
+    id: 2,
+    taskName: "task2",
+    desc: "desc1",
+    status: "Completed",
+  },
+  {
+    id: 3,
+    taskName: "task3",
+    desc: "desc1",
+    status: "Not Completed",
+  },
+  {
+    id: 4,
+    taskName: "task4",
+    desc: "desc1",
+    status: "Not Completed",
+  },
+];
+function Todo({}) {
+  const [todo, setTodo] = useState(data);
+  const [edit, setEdit] = useState(null);
   // console.log(data,todo)
-
-  const handleEdit1 = (el) => {
-    // setEdit(el);
-    // handleEdit(el)
+  const [state, setState] = useState("All");
+  const handleEdit = (el) => {
+    setEdit(el);
+  };
+  const handleUpdate = (ed) => {
+    setTodo((prevTodo) =>
+      prevTodo.map((e) => {
+        if (e.id === ed.id) {
+          return { ...e, ...ed };
+        }
+        return e;
+      })
+    );
+      
 
   };
-  const handleUpdate1 = (ed) => {
 
+  const handleStatusUpdate = (value, id) => {
+    console.log(value, id);
 
- 
-    // setTodo((prevTodo) =>
-    // prevTodo.map((e) => {
-    //   if (e.id === ed.id) {
-    //     return { ...e, ...ed };
-    //   }
-    //   return e;
-    // }))
-    // console.log(ed)
-    // console.log(todo);
+    setTodo((prevTodo) =>
+      prevTodo.map((e) => {
+        if (e.id === id) {
+          return { ...e, status: value };
+        }
+        return e;
+      })
+    );
 
-
-
-    // let upDateTodo = todo?.map((e) => {
-    //   // console.log(todo);
-    //   if (e.id === ed.id) {
-    //    return setTodo({ ...e, ...ed });
-       
-    //   }
-    //   return e;
-    // });
-    // console.log(upDateTodo);
-    // setTodo(upDateTodo);
-    // console.log(todo);
   };
 
-  const handleStatusUpdate1 = (value,id) => {
-    console.log(value,id)
+  console.log(todo);
 
-    handleStatusUpdate(value,id)
-  //   setTodo((prevTodo) =>
-  //   prevTodo.map((e) => {
-
-  //     if (e.id === id) {
-  //       return { ...e,status:value};
-  //     }
-  //     return e;
-  //   })
-  // );
-
-  // console.log(todo)
-  }
-
-
-  console.log(todo)
-
-  const handleFilter1 = (value) => {
-    
-    handleFilter(value)
-    // if(value === "Completed"){
-    //   let upDateTodo = todo?.filter((e) => e.status === "Completed");
-    //   setTodo(upDateTodo);
-    // }
-    // else if(value === "Not Completed"){
-    //   let upDateTodo = todo?.filter((e) => e.status === "Not Completed");
-    //   setTodo(upDateTodo);
-    // }else{
-    //   setTodo(data);
-    // }
-
-  }
-  
-
-  const handleDelete1 = (id) => {
-    handleDelete(id)
-    // let upDateTodo = todo?.filter((e) => e.id !== id);
-    // setTodo(upDateTodo);
+  const handleFilter = (value) => {
+    if (value === "Completed") {
+      let upDateTodo = todo?.filter((e) => e.status === "Completed");
+      setTodo(upDateTodo);
+    } else if (value === "Not Completed") {
+      let upDateTodo = todo?.filter((e) => e.status === "Not Completed");
+      setTodo(upDateTodo);
+    } else if (value === "All") {
+      setTodo(data);
+    }
   };
 
+  const handleDelete = (id) => {
+    let upDateTodo = todo?.filter((e) => e.id !== id);
+    setTodo(upDateTodo);
+  };
 
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center Todocontainer">
@@ -120,20 +90,28 @@ function Todo({data,setTodo,todo,edit, setEdit,handleEdit,handleDelete,handleUpd
       <hr style={{ width: "100%", marginTop: "0px", marginBottom: "24px" }} />
       <div className="container d-flex flex-column bg-info-subtle py-4 TodoSubDiv">
         <div className="d-flex align-items-center justify-content-between fil">
-          <h5 className="text-center">My Todos</h5>
+          <h5 className="text-center text-info">My Todos</h5>
           <div className="d-flex align-items-center justify-content-around filterDiv">
-            <h5 className="text ">Filter</h5>
+            <h5 className="text text-info">Filter</h5>
             <span className="px-2"></span>
-            <select onChange={(e)=>handleFilter(e.target.value)} className="bg-warning border-0 text-info filterSel" id="">
-              <option value="all">All</option>
+            <select
+              onChange={(e) => setState(e.target.value)}
+              className="bg-warning border-0 text-info filterSel"
+              id=""
+            >
+              <option value="All">All</option>
               <option value="Completed">Completed</option>
-              <option value="Not completed">Not Completed</option>
+              <option value="Not Completed">Not Completed</option>
             </select>
           </div>
         </div>
-
+       
         <div className="row d-flex align-items-center justify-content-between">
           {todo?.map((el, i) => {
+           
+            if ( el.status !== state && state !== "All") {
+              return "";
+            }
             return (
               <div key={i} className="col-sm-12 mt-3 col-md-6 col-lg-4 ">
                 <div
@@ -154,16 +132,15 @@ function Todo({data,setTodo,todo,edit, setEdit,handleEdit,handleDelete,handleUpd
                     </label>
 
                     <select
-                    
-                      onChange={(e)=>handleStatusUpdate(e.target.value,el.id)}
+                      onChange={(e) =>
+                        handleStatusUpdate(e.target.value, el.id)
+                      }
                       value={`${el.status}`}
                       className="bg-warning border-0 rounded px-2 text-white"
-    
                     >
                       <option value="Not Completed">Not Completed</option>
                       <option value="Completed">Completed</option>
                     </select>
-
                   </div>
                   <div className="d-flex align-items-center justify-content-end mr-3 gap-2 py-3 but">
                     {/* <button onClick={() =>handleEdit(el)} className="btn btn-success edit">Edit</button> */}
@@ -210,7 +187,7 @@ function Todo({data,setTodo,todo,edit, setEdit,handleEdit,handleDelete,handleUpd
                                 <div className="mb-3">
                                   <label
                                     htmlFor="recipient-name"
-                                    className="col-form-label text-success fw-bold" 
+                                    className="col-form-label text-success fw-bold"
                                   >
                                     Name:
                                   </label>
@@ -244,21 +221,17 @@ function Todo({data,setTodo,todo,edit, setEdit,handleEdit,handleDelete,handleUpd
                                   ></textarea>
                                 </div>
 
-
-
-                                
                                 <label
-                                    htmlFor="message-text"
-                                    className="col-form-label text-danger fw-bold"
-                                  >
-                                    Status:
-                                  </label>
+                                  htmlFor="message-text"
+                                  className="col-form-label text-danger fw-bold"
+                                >
+                                  Status:
+                                </label>
                                 <div className="mb-3 form-floating">
-                              
-                               
                                   <select
                                     className="form-select"
-                                    id="floatingSelect" aria-label="Floating label select example"
+                                    id="floatingSelect"
+                                    aria-label="Floating label select example"
                                     value={edit ? edit.status : ""}
                                     onChange={(e) =>
                                       setEdit({
@@ -266,17 +239,14 @@ function Todo({data,setTodo,todo,edit, setEdit,handleEdit,handleDelete,handleUpd
                                         status: e.target.value,
                                       })
                                     }
-                                  
                                   >
-                                    <option defaultValue={`Not Completed`}>Not Completed</option>
+                                    <option defaultValue={`Not Completed`}>
+                                      Not Completed
+                                    </option>
                                     <option value="Completed">Completed</option>
                                     {/* <option value="Not Completed">Not Completed</option> */}
                                   </select>
-                                  
-                                </div> 
-
-
-
+                                </div>
                               </form>
                             </div>
                             <div className="modal-footer">

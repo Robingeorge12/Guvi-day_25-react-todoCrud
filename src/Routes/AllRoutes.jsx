@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Routes,Route } from 'react-router-dom'
 import Todo from '../components/Todo/Todo'
 import TodoInput from '../components/TodoInput/TodoInput'
@@ -34,12 +34,13 @@ function AllRoutes() {
 
   const [todo, setTodo] = useState(data);
   const [edit, setEdit] = useState(null);
-
+  
 
   const handleEdit = (el) => {
     setEdit(el);
   };
-  const handleUpdate = (ed) => {
+
+  const handleUpdate =  (ed) => {
 
 
 
@@ -52,17 +53,7 @@ function AllRoutes() {
     }))
     console.log(ed)
     console.log(todo);
-    // let upDateTodo = todo?.map((e) => {
-    //   // console.log(todo);
-    //   if (e.id === ed.id) {
-    //    return setTodo({ ...e, ...ed });
-       
-    //   }
-    //   return e;
-    // });
-    // console.log(upDateTodo);
-    // setTodo(upDateTodo);
-    // console.log(todo);
+  
   };
 
   const handleStatusUpdate = (value,id) => {
@@ -93,17 +84,16 @@ function AllRoutes() {
     else if(value === "Not Completed"){
       let upDateTodo = todo?.filter((e) => e.status === "Not Completed");
       setTodo(upDateTodo);
-    }else{
+    }else if(value === "All"){
       setTodo(data);
     }
 
   }
   
-  const handleDelete = (id) => {
+  const handleDelete = useCallback((id) => {
     let upDateTodo = todo?.filter((e) => e.id !== id);
     setTodo(upDateTodo);
-  };
-
+  })
   return (
  <Routes>
 <Route path="/"  data= {"data"} todo={todo} setTodo={setTodo} element={<Todo edit={edit} handleEdit={handleEdit} handleUpdate={handleUpdate} handleDelete={handleDelete} handleStatusUpdate={handleStatusUpdate} handleFilter={handleFilter}
