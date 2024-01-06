@@ -7,26 +7,26 @@ import EditModal from "../EditModal/EditModal";
 const data = [
   {
     id: 1,
-    taskName: "task1",
-    desc: "desc1",
+    taskName: "React Learning",
+    desc: "I have to learn all concepts of react from scratch",
     status: "Not Completed",
   },
   {
     id: 2,
-    taskName: "task2",
-    desc: "desc1",
+    taskName: "Redux Learning Steps",
+    desc: "Redux is a state management tool across all components of the app",
     status: "Completed",
   },
   {
     id: 3,
-    taskName: "task3",
-    desc: "desc1",
+    taskName: "Javascript Learning",
+    desc: "Javascript is the most popular language in the world",
     status: "Not Completed",
   },
   {
     id: 4,
-    taskName: "task4",
-    desc: "desc1",
+    taskName: "Node JS",
+    desc: "It is an environment where we can run javascript",
     status: "Not Completed",
   },
 ];
@@ -122,7 +122,7 @@ function Todo({}) {
                     Name :<span className="px-2"></span>
                     <span className="text-white fw-bold">{el.taskName}</span>
                   </p>
-                  <p className="title pt-2">
+                  <p className="title pt-2 d-flex overflow-auto todo-desc">
                     Description :<span className="px-2"></span>
                     <span className="text-warning">{el.desc}</span>
                   </p>
