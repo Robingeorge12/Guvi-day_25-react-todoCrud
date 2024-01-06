@@ -42,7 +42,8 @@ function Todo({}) {
     setTodo((prevTodo) =>
       prevTodo.map((e) => {
         if (e.id === ed.id) {
-          return { ...e, ...ed };
+          alert("Updated Successfully");
+          return { ...e, ...ed } ;
         }
         return e;
       })
@@ -68,15 +69,15 @@ function Todo({}) {
   console.log(todo);
 
   const handleFilter = (value) => {
-    if (value === "Completed") {
-      let upDateTodo = todo?.filter((e) => e.status === "Completed");
-      setTodo(upDateTodo);
-    } else if (value === "Not Completed") {
-      let upDateTodo = todo?.filter((e) => e.status === "Not Completed");
-      setTodo(upDateTodo);
-    } else if (value === "All") {
-      setTodo(data);
-    }
+    // if (value === "Completed") {
+    //   let upDateTodo = todo?.filter((e) => e.status === "Completed");
+    //   setTodo(upDateTodo);
+    // } else if (value === "Not Completed") {
+    //   let upDateTodo = todo?.filter((e) => e.status === "Not Completed");
+    //   setTodo(upDateTodo);
+    // } else if (value === "All") {
+    //   setTodo(data);
+    // }
   };
 
   const handleDelete = (id) => {
